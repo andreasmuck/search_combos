@@ -85,7 +85,7 @@ def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_t
                     print('*** Combo target found', target, x, flush=True)            
 
     if found:
-        print("\n### Finishes searching all combos.")
+        print("\n### Finished searching all combos.")
     else:
         print("\n### No combos found.")
         
