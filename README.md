@@ -19,3 +19,6 @@ This is a simple Python module use to find combinations that sum up a target val
 - save search_combos.py to your working directory or somewhere in your Python $PYTHONPATH
 - Create a Pythonscript importing the module and executing the find function with the input values and targets to find
 - See samples for examples
+
+### See it in action
+[![Watch the video](https://github.com/andreasmuck/search_combos/blob/3f371868a8458dc28cae9aae9bca9e71e20d49b8/Thumbnail.png)](https://github.com/andreasmuck/search_combos/blob/3f371868a8458dc28cae9aae9bca9e71e20d49b8/Run%20sample.py.mov)
