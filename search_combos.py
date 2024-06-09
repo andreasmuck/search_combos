@@ -1,14 +1,14 @@
 import sys
 import math
 import datetime
-from itertools import *
+from itertools import combinations
 
-def find(str_values, str_targets, i_reverse = True, i_range = "reverse", i_combine_targets = False):
+def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_targets = False):
     def clr_line():
         sys.stdout.write("\033[K")
         
-    values = list(map(int, str(str_values).split()))
-    targets =list(map(int, str(str_targets).split()))
+    values = list(map(int, str(i_values).split()))
+    targets = list(map(int, str(i_targets).split()))
 
     n_values = len(values)
     total_sum = sum(values)
@@ -84,6 +84,8 @@ def find(str_values, str_targets, i_reverse = True, i_range = "reverse", i_combi
                     clr_line()
                     print('*** Combo target found', target, x, flush=True)            
 
-    if not found:
-        print("\nNo combos found.")
+    if found:
+        print("\n### Finishes searching all combos.")
+    else:
+        print("\n### No combos found.")
         
