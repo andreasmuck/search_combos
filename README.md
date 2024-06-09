@@ -21,4 +21,4 @@ This is a simple Python module use to find combinations that sum up a target val
 - See samples for examples
 
 ### See it in action
-[![Watch the video](https://github.com/andreasmuck/search_combos/blob/3f371868a8458dc28cae9aae9bca9e71e20d49b8/Thumbnail.png)](https://github.com/andreasmuck/search_combos/blob/3f371868a8458dc28cae9aae9bca9e71e20d49b8/Run%20sample.py.mov)
+![Screenshot](https://github.com/andreasmuck/search_combos/blob/main/Execution.png?raw=true)
