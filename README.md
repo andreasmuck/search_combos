@@ -1,4 +1,4 @@
-# search_combos
+# search_combos - a useful python module
 Search a list of values and find combinations matching a target sum.
 
 This is a simple Python module use to find combinations that sum up a target value. Main usage is to match customer payments to open invoices.
@@ -13,3 +13,8 @@ Some considerations:
 - The module assumes that the most probably combinations include almost all input values, thus the search starts with the highest combinations. This can be changed using an input parameter to the search function.
 - A range of values can be passed to the search function to limit the search to a certain amount of combinations. For example, limit the search to combinations of 10 to 15 values. This can be used to interrupt a search and restart later, skipping already searched combinations.
 - To be continued...
+
+Usage:
+- save search_combos.py to your working directory or somewhere in your Python $PYTHONPATH
+- Create a Pythonscript importing the module and executing the find function with the input values and targets to find
+- See samples for examples
