@@ -84,8 +84,12 @@ def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_t
                     clr_line()
                     print('*** Combo target found', target, x, flush=True)            
 
+
+    now_time = datetime.datetime.now()
+    run_time = now_time - start_time
+
     if found:
-        print("\n### Finished searching all combos.")
+        print(f"\n### Finished searching all combos in {run_time}.")
     else:
-        print("\n### No combos found.")
+        print(f"\n### No combos found in {run_time}.")
         
