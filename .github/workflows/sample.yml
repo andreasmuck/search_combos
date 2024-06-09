@@ -5,4 +5,4 @@ on:
         runs-on: ubuntu-latest
         steps:
           -name: Run sample.py
-           run: python3 sample.py
+          -run: python3 sample.py
