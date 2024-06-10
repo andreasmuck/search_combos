@@ -8,3 +8,7 @@ search_combos.find(values, targets, i_combine_targets=True)
 
 # search only combinations with 3 to 6 items
 search_combos.find(values, targets, i_range=range(3, 7))
+
+# using a single target
+target = 339094
+search_combos.find(values, target)
