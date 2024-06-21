@@ -3,12 +3,19 @@ import math
 import datetime
 from itertools import combinations
 
-def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_targets = False):
+def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_targets = False, i_split_combined_targets=True, i_level = 1):
     def clr_line():
         sys.stdout.write("\033[K")
-        
-    values = list(map(int, str(i_values).split()))
-    targets = list(map(int, str(i_targets).split()))
+
+    if type(i_values) in (list, tuple):
+        values =list(i_values)
+    else:
+        values = list(map(int, str(i_values).split()))
+
+    if type(i_targets) in (list, tuple):
+        targets = list(i_targets)
+    else:
+        targets = list(map(int, str(i_targets).split()))
 
     n_values = len(values)
     total_sum = sum(values)
@@ -27,10 +34,10 @@ def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_t
     for i in loop_range:
         n_total += math.comb(n_values, i)
 
-    print(f"*** {n_values} values to combine, {n_total:,} total possible combinations")
-    print(f"*** Total sum of input values: {total_sum:,}")
+    print("*" * i_level, f"{n_values} values to combine, {n_total:,} total possible combinations")
+    print("*" * i_level, f"Total sum of input values: {total_sum:,}")
     for target in targets:
-        print(f"*** Target sum: {target:,}")
+        print("*" * i_level, f"Target sum: {target:,}")
 
     combo_targets = []
     if i_combine_targets and len(targets) > 1:
@@ -41,7 +48,7 @@ def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_t
         combo_targets = list(dict.fromkeys(combo_targets))
 
         for target in combo_targets:
-            print(f"*** Combo target sum: {target:,}")
+            print("*" * i_level, f"Combo target sum: {target:,}")
 
 
     n_checked = 0
@@ -76,20 +83,24 @@ def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_t
                 if (sum_x == target):
                     found = True
                     clr_line()
-                    print('*** Target found', target, x, flush=True)
+                    print("*" * i_level, 'Target found', target, i, x, flush=True)
             
             for target in combo_targets:
                 if (sum_x == target):
                     found = True
                     clr_line()
-                    print('*** Combo target found', target, x, flush=True)            
+                    print("*" * i_level, 'Combo target found', target, i, x, flush=True)     
+                    # Search combo for individual targets 
+                    if i_split_combined_targets:
+                        print("Searching for targets in combined result:")
+                        find(x, targets, i_reverse=i_reverse, i_combine_targets=False, i_level=i_level+1)      
 
 
     now_time = datetime.datetime.now()
     run_time = now_time - start_time
 
     if found:
-        print(f"\n### Finished searching all combos in {run_time}.")
+        print("#" * i_level, f"\nFinished searching all combos in {run_time}.")
     else:
-        print(f"\n### No combos found in {run_time}.")
+        print("#" * i_level, f"\nNo combos found in {run_time}.")
         
