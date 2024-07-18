@@ -100,7 +100,7 @@ def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_t
     run_time = now_time - start_time
 
     if found:
-        print("#" * i_level, f"\nFinished searching all combos in {run_time}.")
+        print("\n", "#" * i_level, f"Finished searching all combos in {run_time}.")
     else:
-        print("#" * i_level, f"\nNo combos found in {run_time}.")
+        print("\n", "#" * i_level, f"No combos found in {run_time}.")
         
