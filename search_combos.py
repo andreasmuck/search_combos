@@ -3,9 +3,10 @@ import math
 import datetime
 from itertools import combinations
 
-def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_targets = False, i_split_combined_targets=True, i_level = 1):
-    def clr_line():
-        sys.stdout.write("\033[K")
+def clr_line():
+    sys.stdout.write("\033[K")
+
+def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_targets = False, i_split_combined_targets = True, i_level = 1, i_verbose = False):
 
     if type(i_values) in (list, tuple):
         values =list(i_values)
@@ -50,6 +51,8 @@ def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_t
         for target in combo_targets:
             print("*" * i_level, f"Combo target sum: {target:,}")
 
+    if i_verbose:
+        print("   TIME      RUN TIME    REMAINING TIME   TOTAL PROGRESS                              COMBO PROGRESS", end='\r')
 
     n_checked = 0
     start_time = datetime.datetime.now()
@@ -58,25 +61,31 @@ def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_t
         combos = combinations(values, i)
         n = math.comb(n_values, i)
 
-        c = 0
-        print()
+        if i_verbose:
+            c = 0
+            print()
+        else:
+            print("*" * i_level, f"Checking {n:21,} {i:3} combos.")
+
         for x in combos:
-            c += 1
-            n_checked += 1
-            p = c / n * 100
-            total_progress = n_checked / n_total * 100
 
-            now_time = datetime.datetime.now()
-            run_time = now_time - start_time
-            try:
-                remaining_time = run_time / total_progress * 100 - run_time
-                if remaining_time.total_seconds() < 0:
-                    remaining_time = datetime.timedelta()
-            except:
-                remaining_time = "-:--:--       "
+            if i_verbose:
+                c += 1
+                n_checked += 1
+                p = c / n * 100
+                total_progress = n_checked / n_total * 100
 
-            clr_line()
-            print(now_time.strftime(" %X"),  f"{run_time} {remaining_time} {total_progress:7.3f}% | Checking {n:21,} {i:3} combos: {p:5.1f}%"   , end='\r', flush=True)
+                now_time = datetime.datetime.now()
+                run_time = now_time - start_time
+                try:
+                    remaining_time = run_time / total_progress * 100 - run_time
+                    if remaining_time.total_seconds() < 0:
+                        remaining_time = datetime.timedelta()
+                except:
+                    remaining_time = "-:--:--       "
+
+                clr_line()
+                print(now_time.strftime(" %X"),  f"{run_time} {remaining_time} {total_progress:7.3f}% | Checking {n:21,} {i:3} combos: {p:5.1f}%"   , end='\r', flush=True)
 
             sum_x = sum(x)
             for target in targets:
@@ -93,7 +102,7 @@ def find(i_values, i_targets, i_reverse = True, i_range = "reverse", i_combine_t
                     # Search combo for individual targets 
                     if i_split_combined_targets:
                         print("Searching for targets in combined result:")
-                        find(x, targets, i_reverse=i_reverse, i_combine_targets=False, i_level=i_level+1)      
+                        find(x, targets, i_reverse=i_reverse, i_combine_targets=False, i_level=i_level+1, i_verbose=i_verbose)      
 
 
     now_time = datetime.datetime.now()
